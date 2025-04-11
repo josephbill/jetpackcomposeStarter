@@ -24,6 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        constraint layout activity -->
+        <activity
+            android:name="com.example.starterapp.ConstraintLayoutActivity"
+            ></activity>
     </application>
 
 </manifest>
