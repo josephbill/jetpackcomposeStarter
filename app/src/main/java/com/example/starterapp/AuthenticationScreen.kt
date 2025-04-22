@@ -5,6 +5,7 @@ import android.os.PersistableBundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,10 +15,13 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.ThumbUp
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -38,7 +42,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -161,16 +167,62 @@ class AuthenticationScreen : ComponentActivity() {
                            }
 
                        )
-
+                       Spacer(modifier = Modifier.height(8.dp))
+                       // Clickable Text
+                       Text(
+                           text = "Forgot Password ?",
+                           style = MaterialTheme.typography.bodySmall.
+                           copy(color = MaterialTheme.colorScheme.primary),
+                           modifier = Modifier.align(Alignment.End).
+                           clickable(onClick = {
+//                               handle reset password functionality here
+                           })
+                       )
+                       Spacer(modifier = Modifier.height(24.dp))
+                       // login button
+                       Button(
+                           onClick = { /* handle login */ },
+                          modifier = Modifier.fillMaxWidth()
+                              .height(48.dp),
+                          shape = RoundedCornerShape(8.dp),
+                          colors = ButtonDefaults.buttonColors(
+                              containerColor = MaterialTheme.colorScheme.
+                              primary ,
+                              contentColor = Color.White
+                          )
+                       ) {
+                           Text(text = "Log In", fontSize = 16.sp)
+                       }
+                       // Linking element to launch the signup composable
+                       Text(
+                           text = "Don't have an account ? Login here",
+                           style = MaterialTheme.typography.bodyMedium,
+                           modifier = Modifier.clickable {
+                               navController.navigate("signup")
+                           }
+                       )
 
                    }
              }
         }
-
     }
     @Composable
     fun SignUpScreen(navController: NavController){
 
+    }
+    @Composable
+    fun ForgotPasswordScreen(navController: NavController){
+
+    }
+    // setting up preview function for my login screen composable
+    @Preview(showBackground = true)
+    @Composable
+    fun LoginScreenPreview(){
+        MaterialTheme {
+            Surface(modifier = Modifier.fillMaxSize()) {
+                 LoginScreen(rememberNavController())
+            }
+        }
     }
 }
 
